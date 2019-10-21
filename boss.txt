@@ -1,0 +1,229 @@
+import java.util.Scanner;
+
+
+
+class Main {
+
+public static void initiateFight(String name, int hp, String move1, String move2, String move3)
+{
+  Scanner key = new Scanner(System.in);
+
+    //health variables
+    int health = 100;
+    int bosshealth = hp;
+    
+    //user actions
+    int damage = 0;
+    int damage2 = 0;
+    int damage3 = 0;
+    int damage4 = 0;
+    int success = 0;
+    
+    //khalzad actions
+    int khalzadmove = 0;
+    int khalzadmg = 0;
+    int khalzadmg2 = 0;
+    int khalzadmg3 = 0;
+    int khalzadmg4 = 0; //khalzadmg 4 is actually hp regen
+
+    //item actions
+    int uzidmg = 0;
+    int uziuses = 1;
+    int cocaineuses = 1;
+    int batdmg = 0;
+
+    
+    System.out.println(name + " approaches from the shadows...\nWhat will you do?");
+    System.out.println(">>Run\n>>Fight");
+
+    String action1 = key.nextLine();
+
+    do
+      {
+      if(action1.equals("Fight"))
+      {
+      System.out.println("What move will you select?");
+      System.out.println(">>Punch\n>>Kick\n>>Bite\n>>EviscerationCannon\n>>Items");
+      String action2 = key.nextLine();
+        if(action2.equals("Punch"))
+          {
+          damage = (int)(Math.random() * 300 + 300);
+          bosshealth = bosshealth - damage;
+          System.out.println("You dealt " + damage + " damage!");
+          damage = 0;
+          System.out.println("Boss HP remaining: " + bosshealth);
+          System.out.println("Your HP: " + health);
+          System.out.println("");
+          }
+        else if(action2.equals("Kick"))
+          {
+          damage2 = (int)(Math.random() * 500 + 100);
+          bosshealth = bosshealth - damage2;
+          System.out.println("You dealt " + damage2 + " damage!");
+          damage2 = 0;
+          System.out.println("Boss HP remaining: " + bosshealth);
+          System.out.println("Your HP: " + health);
+          System.out.println("");
+          }
+        else if(action2.equals("Bite"))
+          {
+          damage3 = (int)(Math.random() * 300 + 250);
+          bosshealth = bosshealth - damage3;
+          System.out.println("You dealt " + damage3 + " damage!");
+          damage3 = 0;
+          System.out.println("Boss HP remaining: " + bosshealth);
+          System.out.println("Your HP: " + health);
+          System.out.println("");
+          }
+        else if(action2.equals("EviscerationCannon"))
+        {
+          success = (int)(Math.random() * 101);
+          if(success == 69)
+            {
+            damage4 = 9999;
+            bosshealth = bosshealth - damage4;
+            System.out.println("Your evisceration cannon worked! You dealt 9999 damage!");
+            damage4 = 0;
+            System.out.println("Boss HP remaining: " + bosshealth);
+            System.out.println("Your HP: " + health);
+            System.out.println("");
+            }
+        
+          else if(success != 69)
+            {
+            System.out.println("Shit!!! Your evisceration cannon backfired!!!");
+            System.out.println("You hurt yourself for 10 damage!");
+            health = health - 10;
+            System.out.println("Boss HP remaining: " + bosshealth);
+            System.out.println("Your HP: " + health);
+            System.out.println("");
+            }
+        }
+        else if(action2.equals("Items"))
+            {
+            System.out.println("Which item do you want to use?");
+            System.out.println(">>>Uzi\n>>>BaseballBat\n>>>Cocaine");
+              String action3 = key.nextLine();
+              if(action3.equals("Uzi") && uziuses == 1)
+                {
+                  uzidmg = (int)(Math.random() * 2500 + 5000);
+                  System.out.println("Hell yeah! Uzi!!!");
+                  System.out.println("You dealt " + uzidmg + " to Khal'zad, AND it looked sick as fuck!!!");
+                  bosshealth = bosshealth - uzidmg;
+                  System.out.println("Boss HP remaining: " + bosshealth);
+                  System.out.println("Your HP: " + health);
+                  System.out.println("");
+                  uziuses = 0;
+                  System.out.println("You ran out of ammo...");
+                  System.out.println("");
+                }
+              else if(action3.equals("Uzi") && uziuses == 0)
+                {
+                  System.out.println("You dumbass!! You had no ammo!");
+                  System.out.println("Your stupid ass dealt 1 damage...");
+                  bosshealth = bosshealth--;
+                  System.out.println("Boss HP remaining: " + bosshealth);
+                  System.out.println("Your HP: " + health);
+                  System.out.println("");
+                }
+              else if(action3.equals("BaseballBat"))
+                {
+                  System.out.println("You used your baseball bat!");
+                  batdmg = (int)(Math.random() * 500 + 500);
+                  bosshealth = bosshealth - batdmg;
+                  System.out.println("You dealt " + batdmg + " damage!");
+                  batdmg = 0;
+                  System.out.println("Boss HP remaining: " + bosshealth);
+                  System.out.println("Your HP: " + health);
+                  System.out.println("");
+                }
+              else if(action3.equals("Cocaine") && cocaineuses == 1)
+                {
+                  System.out.println("You coked yourself up! You're on a coked rampage!");
+                  System.out.println("As a result of cocaine usage, you gained 1000 HP!");
+                  cocaineuses = 0;
+                  health = health + 1000;
+                  System.out.println("Boss HP remaining: " + bosshealth);
+                  System.out.println("Your HP: " + health);
+                  System.out.println("");
+                }
+              else if(action3.equals("Cocaine") && cocaineuses == 0)
+                {
+                  System.out.println("Did you know that the overuse of cocaine leads to addiction?");
+                  System.out.println("We do not support addiction. As a result, we have subtracted the effects of cocaine from your health. Please learn to use cocaine in moderation!");
+                  health = health - 1000;
+                  System.out.println("Boss HP remaining: " + bosshealth);
+                  System.out.println("Your HP: " + health);
+                  System.out.println("");
+                }
+            }
+        
+      System.out.println("It's "+name+"'s turn to attack! Pick a god a pray!!");
+      khalzadmove = (int)(Math.random() * 101);
+      if(khalzadmove >= 0 && khalzadmove < 25)
+        {
+          System.out.println(name+" uses " + move1+"!!!");
+          khalzadmg = (int)(Math.random() * 24 + 1);
+          System.out.println("He dealt " + khalzadmg + " damage to you!");
+          health = health - khalzadmg;
+          khalzadmg = 0;
+          System.out.println("Boss HP remaining: " + bosshealth);
+          System.out.println("Your HP: " + health);
+          System.out.println("");
+        }
+      else if(khalzadmove >= 25 && khalzadmove < 50)
+        {
+          System.out.println(name+" uses " + move2+"!!!");
+          khalzadmg2 = (int)(Math.random() * 5 + 10);
+          System.out.println("He dealt " + khalzadmg2 + " damage to you!");
+          health = health - khalzadmg2;
+          khalzadmg2 = 0;
+          System.out.println("Boss HP remaining: " + bosshealth);
+          System.out.println("Your HP: " + health);
+          System.out.println("");
+        }
+      else if(khalzadmove >= 50 && khalzadmove < 75)
+        {
+          System.out.println(name+" uses " + move3+"!!!");
+          khalzadmg3 = (int)(Math.random() * 20 + 30);
+          System.out.println("He dealt " + khalzadmg3 + " damage to you!");
+          health = health - khalzadmg3;
+          khalzadmg3 = 0;
+          System.out.println("Boss HP remaining: " + bosshealth);
+          System.out.println("Your HP: " + health);
+          System.out.println("");
+        }
+      else
+        {
+          System.out.println(name+" gains a protective shield!");
+          khalzadmg4 = (int)(Math.random() * 100 + 100);
+          System.out.println("He gained a " + khalzadmg4 + " HP shield!");
+          bosshealth = bosshealth + khalzadmg4;
+          khalzadmg4 = 0;
+          System.out.println("Boss HP remaining: " + bosshealth);
+          System.out.println("Your HP: " + health);
+          System.out.println("");
+        }
+      }
+      else if(action1.equals("Run"))
+      {
+      System.out.println("You coward! "+name+" attacks you for 9999 damage!");
+      health = 0;
+      }
+      }
+      while(health > 0 && bosshealth > 0);
+
+     int randomgold = (int)(Math.random()*99+1);
+     int randomexp = (int)(Math.random()*50+50);
+
+     if(health <= 0)
+      System.out.println("Game over! Your soul has been sent to the deepest, darkest depths of eternal hell!\nRun the code and try again?");
+     else if(bosshealth <= 0)
+      System.out.println("You killed "+name+"!\nYou looted " + randomgold + " gold!\nYou gained " + randomexp + " EXP!");
+}
+
+  public static void main(String[] args) {
+    
+    initiateFight("Barack Obama", 10000,"a gun", "Presidential Press", "Michelle Obama as a weapon");
+  }
+}
